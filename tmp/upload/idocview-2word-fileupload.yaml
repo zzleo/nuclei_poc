@@ -1,31 +1,23 @@
 id: idocview-2word-fileupload
 
 info:
-  name: IDoc View /html/2word - Arbitrary File Upload
-  author: DhiyaneshDK
+  name: I Doc View /html/2word 任意文件上传漏洞
+  author: Wen
   severity: high
-  metadata:
-    verified: true
-    max-request: 1
-    fofa-query: title=="在线文档预览 - I Doc View"
-  tags: idoc,rce,instrusive,file-upload
+  verified: true
+  description: |-
+    fofa: title=="在线文档预览 - I Doc View"
+  reference:
+    - https://mp.weixin.qq.com/s/i7IHgq4fn795NghY-aYg5A
+  tags: idocview,fileupload
+  created: 2023/12/27
 
-variables:
-  file: "{{to_lower(rand_text_alpha(5))}}"
-
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}/html/2word?url={{file}}"
-
-    matchers-condition: and
-    matchers:
-      - type: word
-        part: response
-        words:
-          - "{{md5(file)}}.docx"
-
-      - type: status
-        status:
-          - 200
-# digest: 4a0a00473045022100a6d42d8f9ecf47860cad207af09dcdbc5ab74ce3a7995383a1eec4daddffb26c0220633df849b57b7e322ead1e41d4bcf3d54f7b6f9fe88137014ae044d596afdf40:922c64590222798bb761d5b6d8e72950
+set:
+  filename: randomLowercase(6)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /html/2word?url={{filename}}
+    expression: response.status == 200 && response.headers["content-disposition"].icontains(md5(filename))
+expression: r0()
