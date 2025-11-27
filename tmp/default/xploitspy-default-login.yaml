@@ -4,27 +4,46 @@ info:
   name: XploitSPY - Default Login
   author: andreluna
   severity: high
-  verified: false
-  description: |-
+  description: |
     Default login and password to access administrator panel
   reference:
     - https://github.com/XploitWizer-Community/XploitSPY
-  tags: xploitspy,default-login
-  created: 2023/06/24
+  metadata:
+    max-request: 1
+    shodan-query: html:XploitSPY
+  tags: xploitspy,default-login,vuln
 
-set:
-  rooturl: request.url
-  hostname: request.url.host
-rules:
-  r0:
-    request:
-      method: POST
-      path: /login
-      headers:
-        Origin: "{{rooturl}}"
+http:
+  - raw:
+      - |
+        POST /login HTTP/1.1
+        Host: {{Hostname}}
+        Origin: {{RootURL}}
         Content-Type: application/x-www-form-urlencoded
-        Referer: "{{rooturl}}/login"
-      body: username=admin&password=password&hostname={{hostname}}
-      follow_redirects: true
-    expression: response.status == 200 && response.body.bcontains(b'Change Password') && response.body.bcontains(b'Logout')
-expression: r0()
+        Referer: {{RootURL}}/login
+
+        username={{user}}&password={{pass}}&hostname={{Hostname}}
+
+    attack: pitchfork
+    payloads:
+      user:
+        - admin
+      pass:
+        - password
+    redirects: true
+    max-redirects: 2
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "Change Password"
+          - "Logout"
+          - "XploitSPY"
+        condition: and
+
+      - type: status
+        status:
+          - 200
+# digest: 490a0046304402204bc6556accb96ce20d491d2dce90b2226146f46487c8b069c41bbf2765cee41b02204bd7d9465f31e731831e81bf1c6ec6d7917df2bb35a8bd3f5c47257eea72ddc4:922c64590222798bb761d5b6d8e72950
