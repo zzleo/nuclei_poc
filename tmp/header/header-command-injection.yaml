@@ -10,10 +10,8 @@ info:
     cvss-score: 10.0
     cwe-id: CWE-77
   tags: fuzz,rce
-  metadata:
-    max-request: 7650
 
-http:
+requests:
   - raw:
       - |
         GET /?{{header}} HTTP/1.1
@@ -21,8 +19,8 @@ http:
         {{header}}: {{payload}}
 
     payloads:
-      header: helpers/payloads/request-headers.txt
-      payload: helpers/payloads/command-injection.txt
+      header: ../../../helpers/payloads/request-headers.txt
+      payload: ../../../helpers/payloads/command-injection.txt
     attack: clusterbomb
 
     host-redirects: true

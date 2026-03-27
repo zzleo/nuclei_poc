@@ -9,7 +9,6 @@ info:
   metadata:
     shodan-query: http.title:"GitLab"
   tags: gitlab,enum,misconfig,fuzz
-  mongoid: 0000
 
 requests:
   - raw:
@@ -20,7 +19,7 @@ requests:
         Referer: {{BaseURL}}
 
     payloads:
-      user: helpers/wordlists/user-list.txt
+      user: ../../../helpers/wordlists/user-list.txt
 
     stop-at-first-match: true
     matchers-condition: and
