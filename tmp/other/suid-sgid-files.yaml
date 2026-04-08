@@ -1,13 +1,13 @@
-id: suid-sgid-files
+id: macos-suid-sgid-files
 
 info:
-  name: macOS SUID/SGID Files Detection
+  name: SUID/SGID File Check on macOS
   author: geeknik
   severity: high
   description: |
-    Discovers files with SUID or SGID permissions in user-writable directories (/usr/local, /opt, /Applications) that could be exploited for privilege escalation if misconfigured or vulnerable.
+    Files with SUID or SGID permissions can potentially be exploited for privilege escalation if they are misconfigured or have vulnerabilities. This template detects such files for further review.
   impact: |
-    Misconfigured SUID/SGID executables in user-writable directories can be exploited by local users to gain elevated privileges.
+    Misconfigured SUID/SGID executables can be exploited by local users to gain elevated privileges.
   remediation: |
     Review the list of SUID/SGID files and remove the permissions if they are not necessary.
   tags: macos,audit,local,security,privesc
@@ -19,10 +19,9 @@ code:
       - sh
       - bash
     source: |
-      find /usr/local /opt /Applications -perm -4000 -o -perm -2000 -type f -ls 2>/dev/null
+      find / -perm -4000 -o -perm -2000 -type f -exec ls -ld {} \; 2>/dev/null | head -n 20
     matchers:
       - type: regex
         regex:
           - "^-rws.*"
           - "^-..s.*"
-# digest: 4b0a00483046022100dd30985f866765efba07fa5b717ba0293926c4eac8375acdb63235ac56712901022100f2217c9a5f0f16219fe49d888b8195944c5095e3680dd822cbb3dbe840d9a3f0:922c64590222798bb761d5b6d8e72950
