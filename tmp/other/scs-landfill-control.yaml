@@ -1,4 +1,4 @@
-id: scs-landfill-control
+id: landfill-remote-monitoring-control
 
 info:
   name: SCS Landfill Remote Monitoring Control
@@ -9,18 +9,11 @@ info:
   tags: panel,scs,rmc,iot
 
 requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
+  - method: GET
+    path:
+      - "{{BaseURL}}"
 
-    raw:
-      - |
-        GET / HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
-        Accept-Encoding: gzip, deflate
-        Accept: */*
+    redirects: true
     matchers-condition: and
     matchers:
       - type: status
@@ -28,6 +21,6 @@ requests:
           - 200
       - type: word
         words:
-          - "<title>Log in to SCS RMCÂ®</title>"
-          - "SCS RMCÂ®</div>"
+          - "<title>Log in to SCS RMC®</title>"
+          - "SCS RMC®</div>"
         condition: and

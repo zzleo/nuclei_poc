@@ -4,22 +4,34 @@ info:
   name: NPS Default Login
   author: pikpikcu
   severity: high
-  tags: nps,default-login
+  description: NPS default admin credentials were discovered.
+  reference:
+    - https://docs.microfocus.com/NNMi/10.30/Content/Administer/Hardening/confCC2b_pwd.htm
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L
+    cvss-score: 8.3
+    cwe-id: CWE-522
+  metadata:
+    max-request: 1
+  tags: nps,default-login,vuln
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
-
-    raw:
+http:
+  - raw:
       - |
         POST /login/verify HTTP/1.1
-        Host: {{Subdomains}}
+        Host: {{Hostname}}
         Content-Type: application/x-www-form-urlencoded
-        Referer: {{Scheme}}://{{Subdomains}}/login/index
+        Referer: {{Hostname}}/login/index
 
-        username=admin&password=123
+        username={{username}}&password={{password}}
+
+    payloads:
+      username:
+        - admin
+      password:
+        - 123
+    attack: pitchfork
+
     matchers-condition: and
     matchers:
       - type: word
@@ -27,12 +39,15 @@ requests:
           - "application/json"
         part: header
         condition: and
+
       - type: word
         words:
           - '"msg": "login success"'
           - '"status": 1'
         part: body
         condition: and
+
       - type: status
         status:
           - 200
+# digest: 4b0a0048304602210090b24882224d2a6956d8f09ac3812dd25dfe64c57983985a8805cf6756c53260022100c09aa061ab036987ab4b568257ca38453c4472aeab2d665a81aed3d61b4016df:922c64590222798bb761d5b6d8e72950
