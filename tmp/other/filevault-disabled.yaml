@@ -1,11 +1,11 @@
 id: filevault-disabled
 
 info:
-  name: macOS FileVault Disabled
+  name: FileVault Disabled
   author: geeknik
   severity: high
   description: |
-    Identifies if FileVault full-disk encryption is disabled on macOS, leaving data unprotected from unauthorized access.
+    FileVault is a full-disk encryption feature of macOS that helps protect data from unauthorized access. This template checks if FileVault is disabled.
   impact: |
     Disabling FileVault leaves the data on the disk unencrypted and vulnerable to theft or unauthorized access if the device is lost or stolen.
   remediation: |
@@ -24,4 +24,3 @@ code:
       - type: word
         words:
           - "FileVault is Off."
-# digest: 4b0a00483046022100dbeda953db252023089741b1ebc7bfe9469e933be51e45c78375eb388a18e01d022100b08c18ef3cbd1adefb1455ae1b792c1647dba4be6856925de6508a35c4066c05:922c64590222798bb761d5b6d8e72950
