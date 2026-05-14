@@ -1,5 +1,4 @@
 id: api-front
-
 info:
   name: LaunchDarkly REST API
   author: Luqmaan Hadia [Luqiih](https://github.com/Luqiih)
@@ -7,18 +6,14 @@ info:
   reference:
     - https://dev.frontapp.com/reference/introduction
   tags: token-spray,front
-  metadata:
-    max-request: 1
-
 self-contained: true
-http:
+requests:
   - raw:
       - |
         GET https://api2.frontapp.com/accounts HTTP/1.1
         Host: api2.frontapp.com
         Authorization: Bearer {{token}}
         Accept: application/json
-
     matchers-condition: and
     matchers:
       - type: word

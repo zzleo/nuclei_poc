@@ -5,17 +5,22 @@ info:
   author: dhiyaneshDK
   severity: info
   description: Searches for sensitive directories present in the elementor wordpress plugin.
-  reference:
-    - https://www.exploit-db.com/ghdb/6297
-  metadata:
-    max-request: 1
-  tags: listing,plugin,edb,wordpress,vuln
+  reference: https://www.exploit-db.com/ghdb/6297
+  tags: wordpress,listing
 
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}/wp-content/plugins/elementor/"
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
+    raw:
+      - |
+        GET /wp-content/plugins/elementor/ HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
     matchers-condition: and
     matchers:
       - type: word
@@ -27,4 +32,3 @@ http:
       - type: status
         status:
           - 200
-# digest: 490a004630440220420848d1c9a4c0b7951d50fa93ac5786d7ec365ddb9f21a9acc896b7a4294fcd02206c878a741b146ba6445bef2b323af6151f27db06d3182f8d4166488ed4c3524c:922c64590222798bb761d5b6d8e72950

