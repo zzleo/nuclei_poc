@@ -53,4 +53,4 @@ code:
       - type: dsl
         dsl:
           - 'resource + " in " + resourceGroup + " does not have resource logs configured for Azure API Management services"'
-# digest: 490a004630440220609349f2577a25bdd7d4037bf38ac703272123e2733753824033961b1997ddeb0220315ac473c7a4ad24c96e1ffec267e9b912ddc8aff12d794e67416754bb98f5cb:922c64590222798bb761d5b6d8e72950
+

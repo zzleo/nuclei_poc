@@ -52,4 +52,4 @@ code:
       - type: dsl
         dsl:
           - 'name + " is publicly accessible and should restrict network access"'
-# digest: 4a0a00473045022100f092e5de38295307d89891cdc2c693cd32ccad20c1fa88ec3e96519a07e6b47602203afcb47d608e528a93e570d48ea218cfa703155995cdb267c9a7843849f265a2:922c64590222798bb761d5b6d8e72950
+

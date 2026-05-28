@@ -12,6 +12,7 @@ info:
   tags: token-spray,delighted
 
 self-contained: true
+
 http:
   - method: GET
     path:
@@ -36,4 +37,4 @@ http:
       - type: status
         status:
           - 200
-# digest: 4a0a00473045022100dc9d2793bb3ee846b16a3f6732428c10b6ba2b1a0411c6db797b680931c8c61a02202b889e522fd40905d53f6c5dbafcfe0bcd36e42779864a06f30192e40b8000ed:922c64590222798bb761d5b6d8e72950
+

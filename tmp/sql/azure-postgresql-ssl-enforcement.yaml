@@ -52,4 +52,4 @@ code:
       - type: dsl
         dsl:
           - 'name + " in " + resourceGroup + " has SSL disabled"'
-# digest: 4a0a00473045022069e317bde082a7e438c99bc1b9ac9a5bc40f4c13d29ffd07229025e5c7efdd470221009366d3c7bd716c2faa3a9de022031d87557d872cb484af42889e3816e1332d92:922c64590222798bb761d5b6d8e72950
+

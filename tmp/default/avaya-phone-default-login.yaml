@@ -1,5 +1,4 @@
 id: avaya-phone-default-login
-
 info:
   name: Avaya Phone Web Interface - Default Login
   author: tpierru
@@ -11,29 +10,25 @@ info:
   classification:
     cwe-id: CWE-1392
   metadata:
-    verified: true
+    runzero-match: service["http.body"] matches `(?i)Avaya J1\d9 Phone`
     max-requests: 1
     shodan-query: html:"Avaya J179 Phone"
-  tags: default-login,avaya,misconfig
-
+    verified: true
+  tags: avaya,default-login,misconfig
 variables:
   username: "admin"
   password: "27238"
-
 flow: http(1) && http(2)
-
 http:
   - method: GET
     path:
       - "{{BaseURL}}/cgi-bin/J100WebServer.cgi?Operation=0"
-
     extractors:
       - type: kval
         name: nonce
         kval:
           - j100nonce
         internal: true
-
   - raw:
       - |
         POST /cgi-bin/J100WebServer.cgi?Operation=1 HTTP/1.1
@@ -41,7 +36,6 @@ http:
         Content-Type: application/x-www-form-urlencoded
 
         uname={{username}}&psw={{sha256(concat(password,nonce))}}
-
     matchers-condition: and
     matchers:
       - type: word
@@ -50,14 +44,11 @@ http:
           - "/cgi-bin/J100WebServer.cgi?Operation=211"
           - "id=\"redirectToDefault"
         condition: or
-
       - type: word
         part: body
         words:
           - "Invalid username or password"
         negative: true
-
       - type: status
         status:
           - 200
-# digest: 490a00463044022052160b9f254223ce23f031b54483895e9a189cfb7e31d4b0c16a4edb2cea65df022029b40f4ce1e8b27fec261405dfe5545846016b9bb0dc6a4be36e02c1ef3e6535:922c64590222798bb761d5b6d8e72950

@@ -53,4 +53,4 @@ code:
       - type: dsl
         dsl:
           - 'name + " in " + resourceGroup + " does not have double encryption enabled"'
-# digest: 4a0a0047304502201c89184837a9930098dbf8b1779f1abec25433c4a4287528500a5c44068e11b9022100f79f32cf104ccc7d5c396cc8560122928dc9b31b36729927b729f33eddc4df15:922c64590222798bb761d5b6d8e72950
+

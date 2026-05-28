@@ -49,4 +49,4 @@ code:
       - type: dsl
         dsl:
           - '"Versioning is not enabled for S3 Bucket " + bucket'
-# digest: 4a0a004730450220188c6eff76e5890e9487a7990ebc939706257a8d168f4e746b7a10b168f69882022100871f34e7125204a00ffb042ccaf984570af3f3a6a2c582613b4e8333a4f3ba87:922c64590222798bb761d5b6d8e72950
+

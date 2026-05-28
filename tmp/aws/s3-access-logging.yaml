@@ -48,4 +48,4 @@ code:
       - type: dsl
         dsl:
           - '"The S3 bucket " + bucket +" does not have access logging enabled."'
-# digest: 4a0a00473045022100fd29baed40f4c511911881ff79e5672f4533dfa6b19e717d05a961de2df470d502202eb21cdb29ae73b3bfbeabf3cb447bdfc777887e9e6a85b5cfe7edb82bba6e81:922c64590222798bb761d5b6d8e72950
+

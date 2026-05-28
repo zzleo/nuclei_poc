@@ -52,4 +52,4 @@ code:
       - type: dsl
         dsl:
           - 'ids + " is not using BYOK for disk encryption"'
-# digest: 4a0a0047304502206f0204c802b1a82c28c0addbf5544b8fee9505505eabbe72fddb316982a8db98022100d9ec029d66a20915f24568193899bae3e8998fd6d8323d1b720708db01761f36:922c64590222798bb761d5b6d8e72950
+

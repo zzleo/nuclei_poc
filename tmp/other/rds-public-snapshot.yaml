@@ -54,4 +54,4 @@ code:
       - type: dsl
         dsl:
           - '"RDS snapshot " + snapshot + " is public"'
-# digest: 490a004630440220406064aac939d4deee904e965a39e74b5b6a866aa0120dc7a3ac03683a464fcb02204c1c229f967d74c64b9b3ebc03c6d31678f471305d10f708528996202549111f:922c64590222798bb761d5b6d8e72950
+

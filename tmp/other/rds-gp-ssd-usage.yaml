@@ -54,4 +54,4 @@ code:
       - type: dsl
         dsl:
           - 'db + " RDS instance uses Provisioned IOPS SSD, not the most cost-effective storage"'
-# digest: 490a0046304402204abe02c1e1c465599d29b1e4d649d7076822a9529f8bd82e2005335f88b3e19402203cfedc9da10ff590c6b8dd01917ebce8b1c58c4c78f6af76e826b94d5aaa50e7:922c64590222798bb761d5b6d8e72950
+

@@ -55,4 +55,4 @@ code:
       - type: dsl
         dsl:
           - 'name + " in resource group " + resourceGroup + " does not use user-assigned managed identities"'
-# digest: 4a0a0047304502200c952edc825c62c2336623a2db82289bcf41d397cd32b477063353d97b71944f02210087d932200e4783eb85b3c40966e7c9c82ee51c2ca300d3fa6c39f81eca4e6e08:922c64590222798bb761d5b6d8e72950
+

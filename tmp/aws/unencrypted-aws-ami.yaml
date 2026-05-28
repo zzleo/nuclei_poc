@@ -54,4 +54,4 @@ code:
       - type: dsl
         dsl:
           - 'ami + " AMI is not encrypted"'
-# digest: 4a0a00473045022006b2a8f1493aca05a5bbb6dd85e177cfacec3cf7e380e0bdd32179719555a881022100f893098f309383eacc3b8fff8a3394101a3bd39897babe77b4ac0911555498ba:922c64590222798bb761d5b6d8e72950
+
