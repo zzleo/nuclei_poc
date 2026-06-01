@@ -1,38 +1,35 @@
-id: phpmyadmin-misconfiguration
-
+id: phpmyadmin-misconfiguration 1
 info:
-  name: phpmyadmin Data Exposure
   author: pussycat0x
-  severity: medium
-  description: An unauthenticated instance of phpmyadmin was discovered, which could be leveraged to access sensitive information.
-  reference:
-    - https://www.exploit-db.com/ghdb/6997
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
-    cvss-score: 5.3
-    cwe-id: CWE-200
-  metadata:
-    max-request: 2
-  tags: phpmyadmin,misconfig,edb
+  description: Unauthenticated phpmyadmin leads to exposure of sensitive information
+  name: Sensitive data exposure
+  reference: https://www.exploit-db.com/ghdb/6997
+  severity: high
+  tags: phpmyadmin,misconfig
+requests:
+- attack: sniper
+  matchers:
+  - condition: and
+    type: word
+    words:
+    - var db    = 'information_schema';
+    - var opendb_url = 'db_structure.php';
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  payloads:
+    Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+  raw:
+  - 'GET /phpmyadmin/index.php?db=information_schema HTTP/1.1
 
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}/phpmyadmin/index.php?db=information_schema"
-      - "{{BaseURL}}/phpMyAdmin/index.php?db=information_schema"
+    Host: {{Subdomains}}
 
-    stop-at-first-match: true
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
 
-    matchers-condition: and
-    matchers:
-      - type: word
-        words:
-          - "var db    = 'information_schema';"
-          - "var opendb_url = 'db_structure.php';"
-        condition: and
+    Accept-Encoding: gzip, deflate
 
-      - type: status
-        status:
-          - 200
+    Accept: */*
 
-# digest: 4b0a00483046022100bafc9995417fdfa25dfa4668c17078ba4eca8a651519f90621f80445d32077ea022100811967bf5e1a02340f7a28605ea12c663109d298d155002f5f00abaa3d79c4c9:922c64590222798bb761d5b6d8e72950
+    '
+  threads: 100
