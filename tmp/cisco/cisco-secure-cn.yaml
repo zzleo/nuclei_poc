@@ -1,23 +1,26 @@
 id: cisco-secure-cn
 
 info:
-  name: Cisco Secure CN Login Panel - Detect
+  name: Cisco Secure CN
   author: dhiyaneshDk
   severity: info
-  description: Cisco Secure CN login panel was detected.
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
-    cwe-id: CWE-200
+  tags: panel,cisco
   metadata:
-    max-request: 1
-    shodan-query: http.title:"Cisco Secure CN"
-  tags: panel,cisco,discovery
+    shodan-query: 'http.title:"Cisco Secure CN"'
 
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}/login"
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
+    raw:
+      - |
+        GET /login HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
     matchers-condition: and
     matchers:
       - type: word
@@ -28,4 +31,3 @@ http:
       - type: status
         status:
           - 200
-# digest: 4b0a00483046022100e6e8ca47d60948ae42df7a97a175d9e7d9ab13ccb2364a69d5284c26410d58e0022100e822d30d98693650f85bd81db939090a5a81de3b18567d80b38ccf7b8076f5d7:922c64590222798bb761d5b6d8e72950

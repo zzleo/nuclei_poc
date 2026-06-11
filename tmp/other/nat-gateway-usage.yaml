@@ -54,4 +54,4 @@ code:
       - type: dsl
         dsl:
           - 'vpc + " VPC is not using Managed NAT Gateways"'
-
+# digest: 4a0a00473045022100f15845608859adbcb7bc461874985337e016b6bcb1d26f443fd2a91ff851c9340220694f547d8ddea40af0456426f61944e9ca77f5cffbe76e991099683455728858:922c64590222798bb761d5b6d8e72950

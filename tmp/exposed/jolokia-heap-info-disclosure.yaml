@@ -4,17 +4,26 @@ info:
   name: Jolokia Java Heap Information Disclosure
   author: milo2012
   severity: info
-  metadata:
-    max-request: 1
-  tags: jolokia,disclosure,java,vuln
+  tags: jolokia,disclosure
 
-http:
-  - raw:
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
+
+    raw:
       - |
         POST /jolokia/ HTTP/1.1
-        Host: {{Hostname}}
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:75.0) Gecko/20100101 Firefox/75.0
+        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.
+        Accept-Language: en-GB,en;q=0.5
+        Accept-Encoding: gzip, deflate
+        Connection: close
+        Upgrade-Insecure-Requests: 1
         Content-Type: application/x-www-form-urlencoded
-
+        Content-Length: 136
 
         {
            "type":"EXEC",
@@ -25,10 +34,8 @@ http:
               0
            ]
         }
-
     matchers:
       - type: word
-        part: body
         words:
           - 'stacktrace":"java.io.IOException: No such file or directory'
-# digest: 4b0a00483046022100f5285161e2fcd392a069daf21cc46d88d10c39b81a8b487d7c0b9ec0a49efb9c022100dc74437c2c4c5c9d16aef6e4ef9f1f74745cbd4598569fb93dfee6ddd61a5667:922c64590222798bb761d5b6d8e72950
+        part: body

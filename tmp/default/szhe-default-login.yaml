@@ -3,36 +3,27 @@ id: szhe-default-login
 info:
   name: Szhe Default Login
   author: pikpikcu
-  severity: medium
-  description: Szhe default login information was discovered.
+  severity: low
+  tags: szhe,default-login
   reference:
-    - https://github.com/Cl0udG0d/SZhe_Scan
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:N/A:N
-    cvss-score: 5.8
-    cwe-id: CWE-522
-  metadata:
-    max-request: 1
-  tags: szhe,default-login,vuln
+    - https://github.com/Cl0udG0d/SZhe_Scan # vendor homepage
 
-http:
-  - raw:
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
+
+    raw:
       - |
         POST /login/ HTTP/1.1
-        Host: {{Hostname}}
+        Host: {{Subdomains}}
         Content-Type: application/x-www-form-urlencoded
 
-        email={{username}}&password={{password}}&remeber=true
-
-    payloads:
-      username:
-        - springbird@qq.com
-      password:
-        - springbird
-    attack: pitchfork
-
+        email=springbird@qq.com&password=springbird&remeber=true
     matchers-condition: and
     matchers:
+
       - type: word
         words:
           - 'You should be redirected automatically to target URL: <a href="/">/</a>'
@@ -45,4 +36,3 @@ http:
       - type: status
         status:
           - 302
-# digest: 4b0a00483046022100f66e2dc802a0cb92e2c21af9c1ec8db1a12d5535d6227c43a1b7c299eee9f7cd022100f8a905a6a877ae20ec094f00eda445fee155bfbda952335239dcc1a3f83b6065:922c64590222798bb761d5b6d8e72950

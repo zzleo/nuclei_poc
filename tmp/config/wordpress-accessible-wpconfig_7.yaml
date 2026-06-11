@@ -1,45 +1,33 @@
-id: wordpress-accessible-wpconfig
+id: wordpress-accessible-wpconfig 7
 info:
+  author: Kiblyn11,zomsop82,madrobot,geeknik,daffainfo
   name: WordPress accessible wp-config
-  author: Kiblyn11,zomsop82,madrobot,geeknik,daffainfo,r12w4n
   severity: high
-  description: The remote WordPress installation has the `wp-config` file remotely accessible and its content available for reading.
-  tags: wordpress,backup
-
+  tags: wordpress,backups
 requests:
-  - method: GET
-    path:
-      - '{{BaseURL}}/wp-config.php'
-      - '{{BaseURL}}/.wp-config.php.swp'
-      - '{{BaseURL}}/wp-config-sample.php'
-      - '{{BaseURL}}/wp-config.inc'
-      - '{{BaseURL}}/wp-config.old'
-      - '{{BaseURL}}/wp-config.txt'
-      - '{{BaseURL}}/wp-config.php.txt'
-      - '{{BaseURL}}/wp-config.php.bak'
-      - '{{BaseURL}}/wp-config.php.old'
-      - '{{BaseURL}}/wp-config.php.dist'
-      - '{{BaseURL}}/wp-config.php.inc'
-      - '{{BaseURL}}/wp-config.php.swp'
-      - '{{BaseURL}}/wp-config.php.html'
-      - '{{BaseURL}}/wp-config-backup.txt'
-      - '{{BaseURL}}/wp-config.php.save'
-      - '{{BaseURL}}/wp-config.php~'
-      - '{{BaseURL}}/wp-config.php-backup'
-      - '{{BaseURL}}/wp-config.php.orig'
-      - '{{BaseURL}}/wp-config.php.original'
-      - '{{BaseURL}}/_wpeprivate/config.json'
+- attack: sniper
+  matchers:
+  - part: body
+    type: word
+    words:
+    - DB_NAME
+    - WPENGINE_ACCOUNT
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  payloads:
+    Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+  raw:
+  - 'GET /wp-config.php.txt HTTP/1.1
 
-    stop-at-first-match: true
-    matchers-condition: and
-    matchers:
-      - type: word
-        words:
-          - "DB_NAME"
-          - "DB_PASSWORD"
-        part: body
-        condition: and
+    Host: {{Subdomains}}
 
-      - type: status
-        status:
-          - 200
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+
+    Accept-Encoding: gzip, deflate
+
+    Accept: */*
+
+    '
+  threads: 100

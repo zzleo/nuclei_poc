@@ -4,20 +4,24 @@ info:
   name: Publicly exposed Kafdrop Interface
   author: dhiyaneshDk
   severity: low
-  description: Publicly Kafdrop Interface is exposed.
-  metadata:
-    max-request: 1
-  tags: exposure,misconfig,kafdrop,vuln
+  tags: exposure,misconfig
 
-http:
-  - method: GET
-    path:
-      - '{{BaseURL}}'
+requests:
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
+    raw:
+      - |
+        GET / HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
     matchers:
       - type: word
         words:
           - "<title>Kafdrop: Broker List</title>"
           - "Kafka Cluster Overview"
         condition: and
-# digest: 4a0a00473045022100c6791fec8cc7cb1bac3f840a51e9ddce608c7e5701c8c397f10b195b0a906f43022001d46106181141d480f6837221cd62adb658afc38b654b02d3cad8393ae2a6b2:922c64590222798bb761d5b6d8e72950

