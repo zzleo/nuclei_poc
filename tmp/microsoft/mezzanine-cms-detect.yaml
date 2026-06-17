@@ -1,41 +1,45 @@
-http:
-- matchers:
-  - case-insensitive: true
-    condition: or
-    type: word
-    words:
-    - powered by Mezzanine
-    - Welcome to Mezzanine
-    - Mezzanine version
-  - regex:
-    - (?i)mezzanine\s+(v[0-9.]+)
-    - (?i)<title>Mezzanine CMS
-    type: regex
-  matchers-condition: or
-  method: GET
-  path:
-  - '{{BaseURL}}'
-  payloads:
-    paths:
-    - /
-    - /admin/login/
-    - /admin/dashboard/
-    - /static/js/mezzanine.js
-    - /settings.py
-    - /mezzanine/
-  stop-at-first-match: true
 id: mezzanine-cms-detect
-info:
-  author: Chirag Mistry
-  description: 'Detects instances of Mezzanine CMS based on unique fingerprints and
-    identifiers.
 
-    '
+info:
+  name: Mezzanine CMS - Detect
+  author: Chirag Mistry
+  severity: info
+  description: |
+    Detects instances of Mezzanine CMS based on unique fingerprints and identifiers.
   metadata:
     shodan-query:
-    - http.component:"Mezzanine"
-    - http.component:"mezzanine"
-    - cpe:"cpe:2.3:a:mezzanine:mezzanine"
-  name: Mezzanine CMS - Detect
-  severity: info
+      - http.component:"Mezzanine"
+      - http.component:"mezzanine"
+      - cpe:"cpe:2.3:a:mezzanine:mezzanine"
   tags: detect,mezzanine,cms,tech
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    payloads:
+      paths:
+        - "/"
+        - "/admin/login/"
+        - "/admin/dashboard/"
+        - "/static/js/mezzanine.js"
+        - "/settings.py"
+        - "/mezzanine/"
+
+    stop-at-first-match: true
+    matchers-condition: or
+    matchers:
+      - type: word
+        words:
+          - "powered by Mezzanine"
+          - "Welcome to Mezzanine"
+          - "Mezzanine version"
+        condition: or
+        case-insensitive: true
+
+      - type: regex
+        regex:
+          - "(?i)mezzanine\\s+(v[0-9.]+)"
+          - "(?i)<title>Mezzanine CMS"
+# digest: 4a0a00473045022100a2b08c95ce997c713f5be195140490439bee9626aed8520d9ad0db628284dd8e02201e2f2c6377de14b85f8fad316cf4e531130371156a6ae3a38c27f73418b33c41:922c64590222798bb761d5b6d8e72950
