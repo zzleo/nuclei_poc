@@ -1,16 +1,25 @@
-name: poc-yaml-kafka-manager-unauth
-manual: true
-transport: http
-rules:
-    r0:
-        request:
-            cache: true
-            method: GET
-            path: /
-            follow_redirects: false
-        expression: response.status == 200 && response.body.bcontains(b"Kafka Manager</a>") && response.body.bcontains(b"<title>Kafka Manager</title>") && response.body.bcontains(b"Add Cluster")
-expression: r0()
-detail:
-    author: Aquilao(https://github.com/Aquilao)
-    links:
-        - https://blog.csdn.net/qq_36923426/article/details/111361158
+http:
+- matchers:
+  - part: body
+    type: word
+    words:
+    - <title>Kafka Manager</title>
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}'
+id: kafka-manager-unauth
+info:
+  author: Paper-Pen
+  description: A kafka manager unauthorized access was discovered.
+  metadata:
+    fofa-query: app="Kafka-Manager"
+    max-request: 1
+  name: Kafka Manager Panel - Unauthorized Access
+  reference:
+  - https://github.com/yahoo/CMAK
+  severity: low
+  tags: misconfig,apache,kafka,unauth,exposure
