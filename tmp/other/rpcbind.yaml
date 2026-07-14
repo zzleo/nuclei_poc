@@ -18,4 +18,4 @@ tcp:
   - name: rpcbind
     type: regex
     regex:
-    - ^\x18\0\x01\x02Invalid packet length\0
+    - ^\x18\x00\x01\x02Invalid packet length\x00

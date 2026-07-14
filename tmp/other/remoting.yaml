@@ -20,4 +20,4 @@ tcp:
   - name: remoting
     type: regex
     regex:
-    - '(?i)^\.NET\x01\0\x02\0\0\0\0\0\0\0\x02\0\x03\x01\0\x03\0\x01\x01..\0\0System\.Runtime\.Remoting\.RemotingException: Infracci\xc3\xb3n del protocolo del canal Tcp'
+    - '(?i)^\.NET\x01\x00\x02\x00\x00\x00\x00\x00\x00\x00\x02\x00\x03\x01\x00\x03\x00\x01\x01..\x00\x00System\.Runtime\.Remoting\.RemotingException: Infracci\xc3\xb3n del protocolo del canal Tcp'

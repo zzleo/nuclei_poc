@@ -2,7 +2,7 @@ id: textp2p_texting_widget-2d36fa25-108b-462b-b84e-2e77943b1871
 
 info:
   name: >
-    TextP2P Texting Widget <= 1.7 - Cross-Site Request Forgery to Settings Update
+    TextP2P Texting Widget <= 1.8 - Cross-Site Request Forgery to Settings Update
   author: topscoder
   severity: medium
   description: >
@@ -48,4 +48,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '<= 1.7')
+          - compare_versions(version, '<= 1.8')

@@ -5,18 +5,17 @@ info:
   tags: detect,tech,nameserver,service
   severity: info
   metadata:
-    info: IEN 116
     operating_system: Solaris
-    rarity: 3
+    rarity: 1
 tcp:
-- name: help
+- name: rpccheck
   inputs:
-  - data: help\r\n\r\n
+  - data: \x72\xFE\x1D\x13\0\0\0\0\0\0\0\x02\0\x01\x86\xA0\0\x01\x97\x7C\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0
   host:
   - '{{Hostname}}'
-  port: 7,13,37,42
+  port: 17,88,111,407,500,517,518,1419,2427,4045,10000,10080,12203,27960,38978,32750-32810
   extractors:
   - name: nameserver
     type: regex
     regex:
-    - ^\x03\x03\x02$
+    - ^help\r\n\r\n\xff\xbf\xf8\xb0\xff7\x00\x18\x00\x00\x00\x01\x00\x00\x00\x00

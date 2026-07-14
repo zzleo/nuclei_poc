@@ -6,7 +6,7 @@ info:
   severity: info
   reference:
     - https://github.com/vinothsparrow/iframe-broker/blob/main/static/script.js
-  tags: headless,postmessage
+  tags: headless,postmessage,discovery
 
 headless:
   - steps:
@@ -69,4 +69,4 @@ headless:
         part: alerts
         kval:
           - alerts
-# digest: 490a0046304402203e9bd9f021bbf2a081ac817e6f8381e39f6507e40a22659ebed4a8402fea0d1202204f1d217045fc3577876bf20765baa2c6880a41fbf940c426dbdd2d96289e04e1:922c64590222798bb761d5b6d8e72950
+# digest: 490a0046304402205bdcfd850c2338ab4eb322306b9f6feae16fe6907c1b2826685552f61433098e02206ca893e0450f6f8cbe9432854bae73fb2ce1203bb2199a214d7b1e85a6652ef6:922c64590222798bb761d5b6d8e72950

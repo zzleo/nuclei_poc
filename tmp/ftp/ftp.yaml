@@ -1,13 +1,15 @@
 id: ftp
 info:
-  name: FreeBSD ftpd
+  name: VMware Pivotal Web Server mod_ftpd
   author: nmap,cn-kali-team
   tags: detect,tech,ftp,service
   severity: info
   metadata:
-    operating_system: FreeBSD
+    info: Dell EMC Unity Secure Remote Services Gateway
+    product: pivotal_web_server
     rarity: 0
-    version: $1
+    vendor: pivotal
+    verified: true
 tcp:
 - name: 'null'
   inputs:
@@ -18,4 +20,4 @@ tcp:
   - name: ftp
     type: regex
     regex:
-    - ^220  FTP server \(Version ([\w.]+)\) ready\.\r\n
+    - ^220-Welcome to ESRS Gateway FTP service\.\r\n220 httpdftp FTP Server \(Apache PivotalWebServer\) ready\.\r\n

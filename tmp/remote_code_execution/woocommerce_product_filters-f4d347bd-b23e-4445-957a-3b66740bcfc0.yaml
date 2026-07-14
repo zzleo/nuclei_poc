@@ -2,7 +2,7 @@ id: woocommerce_product_filters-f4d347bd-b23e-4445-957a-3b66740bcfc0
 
 info:
   name: >
-    WooCommerce Product Filters < 2.0.6 - Unauthenticated PHP Object Injection
+    WooCommerce Product Filters 2.0.0 - 2.0.5 - Unauthenticated PHP Object Injection
   author: topscoder
   severity: critical
   description: >
@@ -48,4 +48,4 @@ http:
 
       - type: dsl
         dsl:
-          - compare_versions(version, '< 2.0.6')
+          - compare_versions(version, '>= 2.0.0', '<= 2.0.5')
