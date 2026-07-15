@@ -1,12 +1,13 @@
 id: missing-x-frame-options
+DONT USE
 
 info:
-  name: Clickjacking (Missing XFO header)
-  author: kurohost
+  name: Clickjacking
+  author: kurohost,shelled
   severity: low
-  tags: misc
+  tags: misc,generic
 
-http:
+requests:
   - method: GET
     path:
       - "{{BaseURL}}"

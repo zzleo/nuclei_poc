@@ -10,6 +10,7 @@ info:
     cvss-score: 0
     cwe-id: CWE-200
   tags: android,file
+
 file:
   - extensions:
       - xml
@@ -19,4 +20,4 @@ file:
           - "android:scheme=\"file\""
 
 # Enhanced by md on 2023/05/03
-# digest: 4a0a00473045022100e1b3965f57f869c3babac5d0d8eaab8473fbd547ede00744e8e2dc2bb683f10c02200491a767c6fda145c2b792a960fdfac4f541c9ae9db0256dcffc1b858d9ddd13:922c64590222798bb761d5b6d8e72950
+# digest: 4b0a00483046022100e8b24b025a17f697b14a3119b10d9a4799f2370d0885c8c1cdcfd81288dbf7f2022100995dfa8c687461ea7765795595f6966a18d626e6803ecd9a9f1f20492efeccf1:922c64590222798bb761d5b6d8e72950

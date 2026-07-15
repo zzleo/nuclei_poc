@@ -4,7 +4,8 @@ info:
   name: DVWA Headless Automatic Login
   author: pdteam
   severity: high
-  tags: headless,dvwa
+  tags: headless,dvwa,vuln
+
 headless:
   - steps:
       - args:
@@ -57,5 +58,4 @@ headless:
         type: word
         words:
           - "First time using DVWA"
-
-# digest: 4b0a00483046022100a040c6c41b9b5b1e73efb018f1cb4fe227565b54bc2aa67dd53e374a885999c9022100fb4ec11f7241e354adad5e019ccd2fdf8fba164935dfaefde071678428bf66a0:922c64590222798bb761d5b6d8e72950
+# digest: 4a0a0047304502203f167fa66217ad1548152a7f7257b78eddf2ef3e6412885c5592acef1b3d06f30221008696188b61504cba10895da2637cc40d3a056800ba4684a135d1698f06fd4787:922c64590222798bb761d5b6d8e72950
