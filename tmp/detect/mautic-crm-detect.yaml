@@ -6,15 +6,15 @@ info:
   severity: info
   description: Detects Mautic CRM
   tags: tech,mautic,crm
-  references:
+  reference:
     - https://github.com/mautic/mautic
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}/s/login"
 
-    matcherscondition: or
+    matchers-condition: or
     matchers:
       - type: word
         part: body

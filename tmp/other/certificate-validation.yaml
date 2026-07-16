@@ -10,7 +10,6 @@ info:
     cvss-score: 5.3
     cwe-id: CWE-200
   tags: android,file
-
 file:
   - extensions:
       - all
@@ -18,4 +17,6 @@ file:
       - type: word
         words:
           - "Landroid/webkit/SslErrorHandler;->proceed()V"
-# digest: 4a0a0047304502203a5b4da3f1e3509a4b87979b577ff32582a0e97a8592efd9da2249787b69766f022100a143c64fd79c5b864de39f00692ccec0cd868b1050bc18671ec61808aeb0fe31:922c64590222798bb761d5b6d8e72950
+
+# Enhanced by md on 2023/05/02
+# digest: 4a0a00473045022100aef4ef4ea43eae93cb0373d207d40684412a63044e33386a05852840b2ee110702203dce816c57358a4a1b8ddf362be46263693e4295e9bcff78bfd6d7f2e32f6cd3:922c64590222798bb761d5b6d8e72950
