@@ -3,7 +3,7 @@ info:
   author: SirBugs
   description: This Template checks disclosing secret information via /settings.py
   name: settings.py Disclosure
-  severity: High
+  severity: high
   tags: config, secrets, leaks, cheatset, tokens, sql, tokens
 requests:
 - matchers:

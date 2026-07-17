@@ -1,22 +1,19 @@
+http:
+- matchers:
+  - negative: true
+    part: body
+    type: word
+    words:
+    - error
+  method: GET
+  path:
+  - https://roads.googleapis.com/v1/snapToRoads?path=-35.27801,149.12958|-35.28032,149.12907&interpolate=true&key={{token}}
 id: api-googleroutetotraveled
-
 info:
-  name: Google Route to Traveled API Test
   author: zzeitlin
-  severity: info
-  tags: token-spray,google,route
   metadata:
     max-request: 1
-
+  name: Google Route to Traveled API Test
+  severity: info
+  tags: token-spray,google,route
 self-contained: true
-http:
-  - method: GET
-    path:
-      - "https://roads.googleapis.com/v1/snapToRoads?path=-35.27801,149.12958|-35.28032,149.12907&interpolate=true&key={{token}}"
-
-    matchers:
-      - type: word
-        part: body
-        words:
-          - 'error'
-        negative: true

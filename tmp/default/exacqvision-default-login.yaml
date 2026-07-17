@@ -4,38 +4,25 @@ info:
   name: ExacqVision Default Login
   author: ELSFA7110
   severity: high
+  verified: true
+  description: |-
+    ExacqVision Web Service default login credentials (admin/admin256) were discovered.
+    fofa: ExacqVision
+  reference:
+    - https://cdn.exacq.com/auto/manspec/files_2/exacqvision_user_manuals/web_service/exacqVision_Web_Service_Configuration_User_Manual_(version%208.8).pdf
   tags: exacqvision,default-login
-  reference: https://cdn.exacq.com/auto/manspec/files_2/exacqvision_user_manuals/web_service/exacqVision_Web_Service_Configuration_User_Manual_(version%208.8).pdf
+  created: 2023/06/24
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
-
-    raw:
-      - |
-        POST /service.web HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
-        Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-        Connection: close
-
+rules:
+  r0:
+    request:
+      method: POST
+      path: /service.web
+      body: |
         action=login&u=admin&p=admin256
-    matchers-condition: and
-    matchers:
-      - type: status
-        status:
-          - 200
-
-      - type: word
-        part: header
-        words:
-          - "application/json"
-
-      - type: word
-        part: body
-        condition: and
-        words:
-          - '"auth":'
-          - '"success": true'
+    expression: |
+      response.status == 200 &&
+      response.body.bcontains(b'"auth":') &&
+      response.body.bcontains(b'"success": true') &&
+      response.headers["content-type"].contains('application/json')
+expression: r0()

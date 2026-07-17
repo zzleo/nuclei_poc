@@ -1,23 +1,23 @@
-id: amazon-mws-auth-token
+id: amazon-mws-auth-token-value
 
 info:
-  name: Amazon MWS Auth Token
-  author: puzzlepeaches
-  severity: info
+  name: Amazon MWS Authentication Token - Detect
+  author: gaurang
+  severity: medium
+  description: Amazon MWS authentication token was detected.
   classification:
-    cwe-id: CWE-522,CWE-540
-  metadata:
-    max-request: 1
-  tags: exposure,token,aws,amazon,auth,vuln
-
-http:
-  - method: GET
-    path:
-      - "{{BaseURL}}"
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
+    cvss-score: 5.3
+    cwe-id: CWE-200
+  tags: token,file,amazon,auth
+file:
+  - extensions:
+      - all
 
     extractors:
       - type: regex
-        part: body
         regex:
           - "amzn\\.mws\\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-# digest: 490a00463044022064ee98109d47c47696d58dacc82fbbf6ae47448817c3df02008d0acb1ab287c702203c1a8ed63ecc22e893c74ae1ea980532d3cd959b6d5791921ad741df71cb5685:922c64590222798bb761d5b6d8e72950
+
+# Enhanced by md on 2023/05/04
+# digest: 4a0a00473045022100a22e9ab4357449ff0b0d0e1d56fd2a2a815900eb260c13cdc8ca5b4904508d76022030e701c98fff70a3c0e8174fe27c30c87c60b0a4acdc97555a71970ab6e5e83a:922c64590222798bb761d5b6d8e72950

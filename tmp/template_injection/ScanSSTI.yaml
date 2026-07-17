@@ -3,7 +3,7 @@ id: ScanReflectedSSTI
 info:
   name: Server Side Template Injection (SSTI)
   author: Hernan Rodriguez
-  severity: Critical
+  severity: critical
   description: SSTI or CSTI via GET parameter
   reference: https://www.linkedin.com/in/hernanrodriguez-/
     - 

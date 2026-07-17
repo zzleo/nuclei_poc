@@ -6,10 +6,7 @@ info:
   severity: info
   metadata:
     info: Stellaris $2 microcontroller
-    product: lwip
     rarity: 1
-    vendor: lwip_project
-    verified: true
     version: $1
 tcp:
 - name: get-request

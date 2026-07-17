@@ -1,22 +1,19 @@
+http:
+- matchers:
+  - negative: true
+    part: body
+    type: word
+    words:
+    - error_message
+  method: GET
+  path:
+  - https://maps.googleapis.com/maps/api/geocode/json?latlng=40,30&key={{token}}
 id: api-googlegeocode
-
 info:
-  name: Google Geocode API Test
   author: zzeitlin
-  severity: info
-  tags: token-spray,google,geocode
   metadata:
     max-request: 1
-
+  name: Google Geocode API Test
+  severity: info
+  tags: token-spray,google,geocode
 self-contained: true
-http:
-  - method: GET
-    path:
-      - "https://maps.googleapis.com/maps/api/geocode/json?latlng=40,30&key={{token}}"
-
-    matchers:
-      - type: word
-        part: body
-        words:
-          - 'error_message'
-        negative: true
