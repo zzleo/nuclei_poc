@@ -1,34 +1,35 @@
+http:
+- matchers:
+  - condition: and
+    type: word
+    words:
+    - '{"formpost"'
+    - '"bulk_'
+  - part: header
+    type: word
+    words:
+    - application/json
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/info'
+  - '{{BaseURL}}/v1/info'
+  stop-at-first-match: true
 id: openstack-config
-
 info:
-  name: Openstack - Infomation Disclosure
   author: MayankPandey01
-  severity: low
-  verified: false
-  description: |-
-    Openstack exposing Configuration or settings related to the Swift object storage system.
-  reference:
-    - https://docs.openstack.org/python-cloudkittyclient/stein/api_reference/info.html
-  tags: exposure,misconfig,openstack
-  created: 2023/11/30
+  description: 'Openstack exposing Configuration or settings related to the Swift
+    object storage system.
 
-rules:
-  r0:
-    request:
-      method: GET
-      path: /info
-    expression: |
-      response.status == 200 &&
-      response.body.bcontains(b'{"formpost"') &&
-      response.body.bcontains(b'bulk_') &&
-      response.headers["content-type"].icontains(b'application/json')
-  r1:
-    request:
-      method: GET
-      path: /v1/info
-    expression: |
-      response.status == 200 &&
-      response.body.bcontains(b'{"formpost"') &&
-      response.body.bcontains(b'bulk_') &&
-      response.headers["content-type"].icontains(b'application/json')
-expression: r0() || r1()
+    '
+  metadata:
+    max-request: 2
+    shodan-query: http.favicon.hash:786533217
+  name: Openstack - Infomation Disclosure
+  reference:
+  - https://docs.openstack.org/python-cloudkittyclient/stein/api_reference/info.html
+  severity: low
+  tags: exposure,misconfig,openstack
