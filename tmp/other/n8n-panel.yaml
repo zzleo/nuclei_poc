@@ -1,32 +1,51 @@
+http:
+- extractors:
+  - group: 1
+    internal: true
+    name: base64_content
+    regex:
+    - <meta name="n8n:config:sentry" content="([A-Za-z0-9+/=]+)"
+    type: regex
+  - dsl:
+    - replace_regex(base64_decode(base64_content), ".*n8n@([0-9]+\\.[0-9]+\\.[0-9]+).*",
+      "$1")
+    internal: true
+    name: version
+    type: dsl
+  - dsl:
+    - '"n8n Version: " + version'
+    type: dsl
+  matchers:
+  - case-insensitive: true
+    part: body
+    type: word
+    words:
+    - <title>n8n.io
+  - status:
+    - 200
+    type: status
+  matchers-condition: and
+  method: GET
+  path:
+  - '{{BaseURL}}/signin'
 id: n8n-panel
-
 info:
+  author: userdehghani,rxerium
+  classification:
+    cpe: cpe:2.3:a:n8n:n8n:*:*:*:*:node.js:*:*:*
+  description: 'The worlds most popular workflow automation platform for technical
+    teams
+
+    '
+  metadata:
+    max-request: 1
+    product: n8n
+    runzero-match: service["favicon.ico.image.mmh3"] == "-831756631"
+    shodan-query: http.favicon.hash:-831756631
+    vendor: n8n
+    verified: true
   name: n8n Panel - Detect
-  author: zan8in
+  reference:
+  - https://n8n.io/
   severity: info
-  verified: true
-  description: |
-    shodan: http.favicon.hash:-831756631
-    fofa: app="n8n"
-  tags: n8n,panel
-  created: 2026/01/08
-
-rules:
-  r0:
-    request:
-      method: GET
-      path: /signin
-    expression: |
-      response.status == 200 && response.body.ibcontains(b'<title>n8n.io')
-    output:
-      search: |
-        '<meta name="n8n:config:sentry" content="(?P<b64>[A-Za-z0-9+/=]+)"'.bsubmatch(response.body)
-      decoded: base64Decode(search["b64"])
-      version: |
-        'n8n@(?P<version>[0-9]+\\.[0-9]+\\.[0-9]+)'.submatch(decoded)
-
-extractors:
-  - type: regex
-    extractor:
-      ver: version["version"]
-expression: r0()
+  tags: panel,n8n,login,detect,discovery,ai
