@@ -1,11 +1,11 @@
 id: finger
 info:
-  name: Linux fingerd
+  name: MiamiDx fingerd
   author: nmap,cn-kali-team
   tags: detect,tech,finger,service
   severity: info
   metadata:
-    operating_system: Linux
+    operating_system: AmigaOS
     rarity: 1
 tcp:
 - name: get-request
@@ -18,4 +18,4 @@ tcp:
   - name: finger
     type: regex
     regex:
-    - '^finger: GET: no such user.\r\nfinger: /: no such user.\r\nfinger: HTTP/1.0: no such user.\r\n$'
+    - ^no such user here\n$

@@ -1,24 +1,21 @@
 id: domain
 info:
-  name: Microsoft DNS
+  name: NOS Communications dnsd
   author: nmap,cn-kali-team
   tags: detect,tech,domain,service
   severity: info
   metadata:
-    operating_system: Windows
-    product: dns
-    rarity: 4
-    vendor: microsoft
-    verified: true
+    device_type: broadband router
+    rarity: 1
 tcp:
-- name: x11-probe
+- name: dnsversion-bind-req
   inputs:
-  - data: \x6C\0\x0B\0\0\0\0\0\0\0\0\0
+  - data: \0\x06\x01\0\0\x01\0\0\0\0\0\0\x07version\x04bind\0\0\x10\0\x03
   host:
   - '{{Hostname}}'
-  port: 80,443,497,1550,2002,5302,7000,7100,7101,7777,8000,6000-6020
+  port: 53,1967,2967,26198
   extractors:
   - name: domain
     type: regex
     regex:
-    - ^\x80\xf0\x80\x12\x00\x01\x00\x00\x00\x00\x00\x00\x20CKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\x00\x00!\x00\x01
+    - \x07version\x04bind\x00\x00\x10\x00\x03\xc0\x0c\x00\x10\x00\x03.{7}NOS DNS$

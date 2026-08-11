@@ -17,4 +17,4 @@ tcp:
   - name: ixia-unknown
     type: regex
     regex:
-    - (?i)^.*\x00\x18Ixia Hardware I/O Server\x13Ixia Communications\x18Ixia Hardware I/O Server\x0b([\d.]+)
+    - (?i)^.*\0\x18Ixia Hardware I/O Server\x13Ixia Communications\x18Ixia Hardware I/O Server\x0b([\d.]+)

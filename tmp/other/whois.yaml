@@ -1,11 +1,13 @@
 id: whois
 info:
-  name: gwhois
+  name: rwhois
   author: nmap,cn-kali-team
   tags: detect,tech,whois,service
   severity: info
   metadata:
+    hostname: $1
     rarity: 1
+    version: $2
 tcp:
 - name: generic-lines
   inputs:
@@ -17,4 +19,4 @@ tcp:
   - name: whois
     type: regex
     regex:
-    - '^Process query: ''''\nQuery recognized as IP\.\n'
+    - ^%rwhois V-[\w:.-]+ ([-\w_.]+) \(by Network Solutions, Inc\. V-([\d.]+)\)\n

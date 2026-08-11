@@ -5,8 +5,7 @@ info:
   tags: detect,tech,icy,service
   severity: info
   metadata:
-    info: 'Name: $2'
-    operating_system: Linux
+    info: Raspberry Pi
     product: dnas
     rarity: 1
     vendor: shoutcast
@@ -23,4 +22,4 @@ tcp:
   - name: icy
     type: regex
     regex:
-    - (?i)^(?:HTTP/1\.0|ICY) \d\d\d .*\r\nicy-notice2:SHOUTcast DNAS/posix\(linux x[86][64]\) v([\d.]+)<BR>\r\n.*icy-name:(.*?)
+    - (?i)^(?:HTTP/1\.0|ICY) \d\d\d .*\r\nicy-notice1:<BR>SHOUTcast DNAS/armv6\(rpi\) v([\d.]+)<BR>\r\n

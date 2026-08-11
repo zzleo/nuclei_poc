@@ -1,6 +1,6 @@
 id: icap
 info:
-  name: Blue Coat ProxyAV
+  name: Traffic Spicer icapd
   author: nmap,cn-kali-team
   tags: detect,tech,icap,service
   severity: info
@@ -18,4 +18,4 @@ tcp:
   - name: icap
     type: regex
     regex:
-    - '(?i)^ICAP/1\.0 501 Method not implemented.*\r\nService: ProxyAV AV scanner ([^\r\n]+)\r\n'
+    - '^ICAP/1\.0 501 Other\r\nServer: Traffic Spicer ([\d.]+)\r\n'

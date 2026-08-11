@@ -19,4 +19,4 @@ tcp:
   - name: opentable-listener
     type: regex
     regex:
-    - ^OpenTable Listener Version ([\w._-]+)\r\n\r\nerror=Bad request\r\n\r\nOTRequestHandler ([\w._-]+) WebRequest\r\n\r\n\0$
+    - ^OpenTable Listener Version ([\w._-]+)\r\n\r\nerror=Bad request\r\n\r\nOTRequestHandler ([\w._-]+) WebRequest\r\n\r\n\x00$

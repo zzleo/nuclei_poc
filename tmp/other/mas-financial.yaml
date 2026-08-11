@@ -18,4 +18,4 @@ tcp:
   - name: mas-financial
     type: regex
     regex:
-    - ^The Host cannot run the specified program\.$
+    - ^409 Invalid Protocol PVXAS/1\.0\r\n
