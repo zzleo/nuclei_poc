@@ -1,38 +1,37 @@
-http:
-- extractors:
-  - dsl:
-    - username
-    - password
-    type: dsl
-  matchers:
-  - part: header
-    type: word
-    words:
-    - 'Location: /'
-  - status:
-    - 303
-    type: status
-  matchers-condition: and
-  raw:
-  - 'POST https://gitea.com/user/login HTTP/1.1
-
-    Host: gitea.com
-
-    Content-Type: application/x-www-form-urlencoded
-
-
-    user_name={{username}}&password={{password}}
-
-    '
 id: gitea-login-check
+
 info:
-  author: parthmalhotra,pdresearch
-  description: Checks for a valid gitea account.
-  metadata:
-    max-request: 1
   name: gitea.com Login Check
-  reference:
-  - https://owasp.org/www-community/attacks/Credential_stuffing
+  author: parthmalhotra,pdresearch
   severity: critical
-  tags: cloud,creds-stuffing,login-check,gitea
+  description: Checks for a valid gitea account.
+  reference:
+    - https://owasp.org/www-community/attacks/Credential_stuffing
+  tags: login-check,gitea,creds-stuffing
+
 self-contained: true
+http:
+  - raw:
+      - |
+        POST https://gitea.com/user/login HTTP/1.1
+        Host: gitea.com
+        Content-Type: application/x-www-form-urlencoded
+
+        user_name={{username}}&password={{password}}
+
+    extractors:
+      - type: dsl
+        dsl:
+          - username
+          - password
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        part: header
+        words:
+          - 'Location: /'
+
+      - type: status
+        status:
+          - 303
