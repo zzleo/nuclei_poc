@@ -4,21 +4,16 @@ info:
   name: Unauthorized HP Printer
   author: pussycat0x
   severity: high
-  tags: hp,iot,unauth
+  description: HP Printer is exposed.
+  metadata:
+    max-request: 1
+  tags: hp,iot,unauth,misconfig,intrusive,vuln
 
-requests:
-  - payloads:
-      Subdomains: /home/mahmoud/Wordlist/AllSubdomains.txt
-    attack: sniper
-    threads: 100
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/SSI/Auth/ip_snmp.htm"
 
-    raw:
-      - |
-        GET /SSI/Auth/ip_snmp.htm HTTP/1.1
-        Host: {{Subdomains}}
-        User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0
-        Accept-Encoding: gzip, deflate
-        Accept: */*
     matchers-condition: and
     matchers:
       - type: word
@@ -30,3 +25,4 @@ requests:
       - type: status
         status:
           - 200
+# digest: 4a0a00473045022067077f41bb43a578e7c3310d15cac3ed60f7e295ad9a9d576bf3e1db7733a727022100d0edc28d35b98a6ed60ecd2115182fde94cabe3af14c48c42797ad5253a3acc8:922c64590222798bb761d5b6d8e72950
