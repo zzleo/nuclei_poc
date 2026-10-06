@@ -1,27 +1,24 @@
+http:
+- headers:
+    APIKey: '{{token}}'
+  matchers:
+  - part: body
+    type: word
+    words:
+    - success
+  method: GET
+  path:
+  - https://api.securitytrails.com/v1/ping
 id: api-securitytrails
-
 info:
-  name: SecurityTrails API Test
   author: 0ri2N
-  severity: info
-  reference:
-    - https://securitytrails.com
-    - https://docs.securitytrails.com
-    - https://securitytrails.com/corp/api
-  tags: dns,ssl,recon,securitytrails,token-spray
   metadata:
     max-request: 1
-
+  name: SecurityTrails API Test
+  reference:
+  - https://securitytrails.com
+  - https://docs.securitytrails.com
+  - https://securitytrails.com/corp/api
+  severity: info
+  tags: recon,securitytrails,token-spray
 self-contained: true
-http:
-  - method: GET
-    path:
-      - https://api.securitytrails.com/v1/ping
-    headers:
-      APIKey: "{{token}}"
-
-    matchers:
-      - type: word
-        part: body
-        words:
-          - success
